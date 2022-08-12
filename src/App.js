@@ -17,6 +17,7 @@ function App() {
   const dispatcher = useDispatch()
 
   const handleSubmit = (event) => {
+    console.log("dsadf")
     const form = event.currentTarget;
     setValidated(true);
     event.preventDefault();
@@ -35,7 +36,7 @@ function App() {
   }
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form id="form" noValidate validated={validated} onSubmit={handleSubmit}>
       <Container fluid>
         <Row>
           <Navigation />

@@ -1,11 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit'
-import { ParticipantReducer, ProductsReducer, StepReducer } from './reducers'
+import { ParticipantReducer, ProductsReducer, StepReducer, UsingReducer } from './reducers'
 
 export const Store = configureStore({
     reducer: {
         participants: ParticipantReducer,
         steps: StepReducer,
-        products: ProductsReducer
+        products: ProductsReducer,
+        usings: UsingReducer
 }})
 
 export default Store
