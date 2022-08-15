@@ -6,7 +6,7 @@ export const ErrorModal = (props) => {
         <Modal.Header closeButton>
             <Modal.Title>Ошибка!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Заполни все поля!</Modal.Body>
+        <Modal.Body>Проверь корректность полей епт!</Modal.Body>
         <Modal.Footer>
             <Button variant="primary" onClick={props.handleClose}>
                 оке

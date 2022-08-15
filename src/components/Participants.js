@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux/es/exports';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
+import Row from 'react-bootstrap/esm/Row';
+import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { ParticipantsActions, StepsActions } from '../actions';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { ParticipantsActions } from '../actions';
 
 export const Participants = () => {
 

@@ -15,6 +15,22 @@ function App() {
   const dispatcher = useDispatch()
 
   const steps = useSelector(s => s.steps)
+  const participants = useSelector(s => s.participants)
+  const products = useSelector(s => s.products)
+
+  const customValidation = () => {
+    if (steps.current === 0) {
+      const unique = Array.from(new Set(participants));
+      return unique.length === participants.length
+    }
+
+    if (steps.current === 1) {
+      const unique = Array.from(new Set(products.map(p => p.name)));
+      return unique.length === products.length
+    }
+
+    return true
+  }
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -28,6 +44,12 @@ function App() {
     }
 
     dispatcher(StepsActions.setValidated(false))
+
+    if (customValidation() === false) {
+      showErrorModal(true)
+      event.stopPropagation();
+      return
+    }
 
     dispatcher(StepsActions.nextStep())
   }

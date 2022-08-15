@@ -2,7 +2,6 @@ import { Button, Form, Table } from "react-bootstrap"
 import CurrencyInput from "react-currency-input-field"
 import { useDispatch, useSelector } from "react-redux"
 import { ProductsActions } from "../actions/ProductsActions"
-import { ProductsConsts } from "../consts/ProductsConsts"
 
 export const Products = () => {
 
@@ -10,6 +9,12 @@ export const Products = () => {
     const products = useSelector(s => s.products)
 
     const dispatch = useDispatch()
+
+    const isInvalid = (p, index) => {
+        const invalid = products.find((prod, i) => prod.name === p.name && index !== i)
+        console.log("product" + invalid)
+        return invalid
+    }
 
     return (
         <Table responsive>
@@ -33,6 +38,9 @@ export const Products = () => {
                         <tr key={index}>
                             <td><Form.Control
                                 required
+                                isInvalid={
+                                    isInvalid(p, index)
+                                }
                                 size="sm"
                                 placeholder=" Введи название продукта"
                                 value={p.name}
@@ -48,12 +56,12 @@ export const Products = () => {
                                     decimalSeparator="." />
                             </td>
                             <td>
-                                <Form.Select    
-                                    required                                
+                                <Form.Select
+                                    required
                                     defaultValue={""}
                                     onChange={(e) => dispatch(ProductsActions.changeOwner(e.target.value, index))}
                                     size="sm" value={p.owner}>
-                                        <option></option>
+                                    <option></option>
                                     {participants.map(pt => (
                                         <option>{pt}</option>
                                     ))
