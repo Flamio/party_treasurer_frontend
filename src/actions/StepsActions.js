@@ -5,7 +5,6 @@ export const StepsActions = {
     prevStep,
     setStep,
     setValidated,
-    setInvalid
 }
 
 function nextStep() {
@@ -22,9 +21,5 @@ function setStep(step) {
 
 function setValidated(validated) {
     return {type: StepConsts.SET_VALIDATED, validated}
-}
-
-function setInvalid(invalid) {
-    return {type: StepConsts.SET_INVALID, invalid}
 }
 

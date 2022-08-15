@@ -3,7 +3,12 @@ import { UsingConsts } from "../consts"
 export const UsingActions = {
     add,
     edit,
-    remove
+    remove, init,
+    clear
+}
+
+function clear() {
+    return {type: UsingConsts.CLEAR, }
 }
 
 function add(participant){
@@ -20,4 +25,8 @@ function edit(participant, index, product){
 
 function remove(participant) {
     return {type: UsingConsts.REMOVE_USING, participant}
+}
+
+function init(participant, values) {
+    return {type: UsingConsts.INIT, participant, values}
 }

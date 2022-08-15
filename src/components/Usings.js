@@ -2,7 +2,6 @@ import { useEffect } from "react"
 import { Button, Form, Table } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { UsingActions } from "../actions"
-import { UsingConsts } from "../consts"
 
 export const Usings = () => {
 
@@ -12,7 +11,9 @@ export const Usings = () => {
     const dispacth = useDispatch()
 
     useEffect(() => {
-        participants.map(p => !usings[p] && dispacth(UsingActions.add(p, "")))
+        dispacth(UsingActions.clear())
+        console.log(usings)
+        participants.map(p => dispacth(UsingActions.init(p, usings[p] ? usings[p] : [""])))
     }, [])
 
     return (<Table responsive>
@@ -29,7 +30,7 @@ export const Usings = () => {
         <tbody>
             {
                 participants.map((p, index) =>
-                    <tr>
+                    <tr key={index}>
                         <td>{p}</td>
                         <td>
                             {
@@ -39,8 +40,8 @@ export const Usings = () => {
                                         required className="mb-2" value={usPr}>
                                         <option></option>
                                         {
-                                            products.map(pr =>
-                                                <option>{pr.name}</option>
+                                            products.map((pr, index) =>
+                                                <option key={index}>{pr.name}</option>
                                             )
                                         }
                                     </Form.Select>

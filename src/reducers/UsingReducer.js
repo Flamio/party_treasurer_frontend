@@ -2,9 +2,18 @@ import { UsingConsts } from "../consts";
 
 export const UsingReducer = (state = {}, action) => {
     switch (action.type) {
+        
+        case UsingConsts.CLEAR:
+            console.log("clear")
+            return {}
+
+        case UsingConsts.INIT:
+            console.log("init")
+            return { ...state, [action.participant]: action.values }
+
         case UsingConsts.ADD_USING:
             console.log(state)
-            return { ...state, [action.participant]: state[action.participant] ? [...state[action.participant], ""] : [""] }
+            return { ...state, [action.participant]: [...state[action.participant], ""] }
 
         case UsingConsts.EDIT_USING:
             console.log(action)

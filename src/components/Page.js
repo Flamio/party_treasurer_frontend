@@ -19,7 +19,7 @@ export const Page = () => {
     }
 
     return (
-        <div style={{paddingBottom: '100px'}}>
+        <div style={{paddingBottom: '150px'}}>
             {page.component}
             {onPlusClickHandler &&
                 <Button className='rounded-circle' size='md'
