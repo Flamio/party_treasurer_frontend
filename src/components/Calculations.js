@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Row, Table } from "react-bootstrap"
+import { Row, Spinner, Table } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { Backend } from "../Backend"
 
@@ -34,9 +34,10 @@ export const Calculations = () => {
 
     }, [])
 
-    return (
+    return ( response.calculations ? 
         <div>
             <Row>
+                <h1 style={{textAlign: 'center'}}>Рассчет</h1>
                 <Table responsive striped bordered hover>
                     <thead>
                         <tr>
@@ -57,7 +58,7 @@ export const Calculations = () => {
                                                 .filter(r => r.name === part)
                                                 .map(r => r.productMap[p.name])[0]
                                             console.log(price)
-                                            return (<td>{price ? price : 0}</td>)
+                                            return (<td style={{textAlign: 'right'}}>{price ? price : 0}</td>)
                                         })
                                     }
                                 </tr>
@@ -71,11 +72,11 @@ export const Calculations = () => {
                                         return
                                     }
                                     const values = response.calculations
-                                        .find(r => r.name === p)                                        
+                                        .find(r => r.name === p)
 
                                     console.log(values.productMap)
 
-                                    return <td key={index}>{Object.values(values.productMap).reduce((acc, val) => acc + val, 0).toFixed(2)}</td>
+                                    return <td style={{textAlign: 'right'}} key={index}>{Object.values(values.productMap).reduce((acc, val) => acc + val, 0).toFixed(2)}</td>
                                 }
                                 )
                             }
@@ -83,10 +84,30 @@ export const Calculations = () => {
                     </tbody>
                 </Table>
             </Row>
-            <Row>
-
+            <Row className="mt-5">
+                <h1 style={{textAlign: 'center'}}>Долги</h1>                
+                <Table responsive striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Кто</th>
+                            <th>Кому</th>
+                            <th>Сколько</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            response.duties &&
+                            response.duties.map(d =>
+                                <tr>
+                                    <td>{d.from}</td>
+                                    <td>{d.to}</td>
+                                    <td style={{textAlign: 'right'}}>{d.duty}</td>
+                                </tr>
+                            )
+                        }
+                    </tbody>
+                </Table>
             </Row>
-        </div>
-
+        </div> : <div style={{textAlign: 'center'}}><Spinner animation="border"/></div>
     )
 }
