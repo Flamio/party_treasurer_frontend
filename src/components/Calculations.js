@@ -101,7 +101,7 @@ export const Calculations = () => {
                                 <tr>
                                     <td>{d.from}</td>
                                     <td>{d.to}</td>
-                                    <td style={{textAlign: 'right'}}>{d.duty}</td>
+                                    <td style={{textAlign: 'right'}}>{d.duty.toFixed(2)}</td>
                                 </tr>
                             )
                         }
