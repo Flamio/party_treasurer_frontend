@@ -30,7 +30,7 @@ export const Footer = (props) => {
                         {
                             (steps.names.length - 1) !== steps.current &&
 
-                            <Button type='submit'  size='md' className='float-lg-end' variant='success' style={{ width: 200 }}>Далее</Button>
+                            <Button type='submit'  size='md' disabled={props.invalid} className='float-lg-end' variant='success' style={{ width: 200 }}>Далее</Button>
 
                         }
                     </Col>

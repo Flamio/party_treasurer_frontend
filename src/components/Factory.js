@@ -9,11 +9,10 @@ export const Factory = {
 }
 
 
-
 function getComponent(step) {    
     switch(step){
         case 0: {
-            return {component: (<Participants/>), onPlusClick: () => ParticipantsActions.increase()}
+            return {component: (<Participants/>), onPlusClick: () => ParticipantsActions.increase() }
         }
 
         case 1: {

@@ -2,7 +2,7 @@ import { StepConsts } from "../consts"
 
 const initState = {
     names: ["Участники", "Продукты", "Использование",
-        "Подсчет"], current: 0
+        "Подсчет"], current: 0, validated: false
 }
 
 export const StepReducer = (state = initState, action) => {
@@ -11,15 +11,19 @@ export const StepReducer = (state = initState, action) => {
 
         case StepConsts.NEXT_STEP:
             console.log("set step" + state.current)
-            return { ...state, current: state.current === state.names.length - 1 ? state.current : state.current + 1 }
+            return { ...state, validated: false, current: state.current === state.names.length - 1 ? state.current : state.current + 1 }
 
         case StepConsts.PREV_STEP:
             console.log("set step" + state.current)
-            return { ...state, current: state.current === 0 ? state.current : state.current - 1 }
+            return { ...state, validated: false, current: state.current === 0 ? state.current : state.current - 1 }
 
         case StepConsts.SET_STEP:
             console.log("set step" + action.step)
-            return { ...state, current: Number(action.step) }
+            return { ...state, validated: false, current: Number(action.step) }
+
+        case StepConsts.SET_VALIDATED:
+            console.log("set validated " + action)
+            return { ...state, validated: action.validated }
 
         default:
             return state

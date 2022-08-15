@@ -21,7 +21,7 @@ export const Navigation = () => {
                     >
                         {
                             steps.names.map((s, index) =>
-                                <Nav.Link key={index} eventKey={index}>{s}</Nav.Link>)
+                                <Nav.Link disabled={index > steps.current} key={index} eventKey={index}>{s}</Nav.Link>)
                         }
                     </Nav>
                 </Navbar.Collapse>

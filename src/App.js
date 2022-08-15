@@ -7,26 +7,27 @@ import Row from 'react-bootstrap/esm/Row';
 import { Footer, Navigation, ErrorModal } from './components';
 import { Page } from './components/Page';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { StepsActions } from './actions';
 
 function App() {
-
-  const [validated, setValidated] = useState(false)
   const [errorModal, showErrorModal] = useState(false)
   const dispatcher = useDispatch()
 
+  const steps = useSelector(s => s.steps)
+
   const handleSubmit = (event) => {
-    console.log("dsadf")
     const form = event.currentTarget;
-    setValidated(true);
     event.preventDefault();
 
     if (form.checkValidity() === false) {
       showErrorModal(true)
+      dispatcher(StepsActions.setValidated(true))
       event.stopPropagation();
       return
     }
+
+    dispatcher(StepsActions.setValidated(false))
 
     dispatcher(StepsActions.nextStep())
   }
@@ -36,7 +37,7 @@ function App() {
   }
 
   return (
-    <Form id="form" noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form id="form" noValidate validated={steps.validated} onSubmit={handleSubmit}>
       <Container fluid>
         <Row>
           <Navigation />
@@ -52,8 +53,8 @@ function App() {
           <Footer />
         </Row>
       </Container>
-      <ErrorModal show={errorModal} handleClose={onErrorModalClose}/>
-    </Form>    
+      <ErrorModal show={errorModal} handleClose={onErrorModalClose} />
+    </Form>
   );
 }
 

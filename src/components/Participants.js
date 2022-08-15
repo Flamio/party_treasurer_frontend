@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { ParticipantsActions } from '../actions';
+import { ParticipantsActions, StepsActions } from '../actions';
 
 export const Participants = () => {
 
@@ -13,12 +13,22 @@ export const Participants = () => {
     {
         console.log(participants)
     }
+
+    const isInvalid = (p, index) => {
+        const invalid = participants.find((part,i) => part === p && index !== i)
+        console.log(invalid)
+        return invalid
+    }
+
     return (
         <Row>
             {participants.map((p, index) =>
                 <Col key={index} lg={6}>
                     <InputGroup className='mb-2 ms-auto' key={index}>
                         <Form.Control
+                            isInvalid={
+                                isInvalid(p, index)
+                            }
                             required
                             value={participants[index]}
                             onChange={(event) => { dispatch(ParticipantsActions.setName(event.target.value, index)) }}
