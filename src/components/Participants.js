@@ -31,6 +31,7 @@ export const Participants = () => {
                             }
                             required
                             value={participants[index]}
+                            onBlur={(event) => {dispatch(ParticipantsActions.setName(event.target.value.trim(), index))}}
                             onChange={(event) => { dispatch(ParticipantsActions.setName(event.target.value, index)) }}
                             placeholder='Введи участника' />
                         <Button variant="danger" onClick={() => dispatch(ParticipantsActions.remove(index))}>-</Button>

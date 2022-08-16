@@ -44,6 +44,7 @@ export const Products = () => {
                                 size="sm"
                                 placeholder=" Введи название продукта"
                                 value={p.name}
+                                onBlur={(e) => dispatch(ProductsActions.changeName(e.target.value.trim(), index))}
                                 onChange={(e) => dispatch(ProductsActions.changeName(e.target.value, index))} /></td>
                             <td>
                                 <CurrencyInput
